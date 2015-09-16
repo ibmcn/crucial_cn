@@ -1,0 +1,223 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ *
+ * Provides a default page to explain what this module does.
+ */
+function tmall_menu() {
+  $items['curl'] = array(
+    'page callback' => 'tmall_page',
+    'access callback' => TRUE,
+    'title' => 'Block Example',
+  );
+  return $items;
+}
+
+
+function tmall_cron() {
+  //$url = 'http://crucial.m.tmall.com/';
+  $url = 'http://crucial.wpic-demo.com/test.1.html';
+  $response = chr_curl_http_request($url);
+  
+
+  if($response->code == 200) {
+    $html_obj = new simple_html_dom();
+    $html_obj->load($response->data);
+    // Get the first div inside .tmall which
+    // corresponds to top products
+    $container = $html_obj->find('.tmall div', 0);
+
+    $top_products = $container->find('ul', 0);
+    $products = array();
+    $i = 0;
+    foreach($top_products->find('li') as $product)
+       {
+            $products[$i]['link'] = $product->find('a', 0)->href;
+            $products[$i]['image'] = $product->find('div img', 0)->dataimg;
+            $products[$i]['title'] = $product->find('.tit', 0)->plaintext;
+            $products[$i]['price'] = $product->find('.price', 0)->plaintext;
+            $i++;
+       }
+
+    // clear the tmall_data every time
+    db_truncate('tmall_data')->execute();
+
+    // Now insert the new tmall data for all products
+    foreach($products as $product) {
+      db_insert('tmall_data')
+        ->fields(array(
+          'title' => $product['title'],
+          'image_url' => $product['image'],
+          'product_url' => $product['link'],
+          'price' => $product['price'],
+        ))->execute();
+    }
+
+  } else {
+    drupal_set_message('TMALL URL is incorrect.');
+  }
+  //dsm($response);
+
+  drupal_set_message('Products from TMALL Updated');
+}
+/**
+ * Implements hook_block_info().
+ *
+ */
+function tmall_block_info() {
+
+  $blocks['tmall_detail'] = array(
+    'info' => t('Tmall five in one'),
+  );
+
+  $blocks['tmall_index'] = array(
+    'info' => t('Tmall ten in one'),
+  );
+
+  return $blocks;
+}
+
+
+function tmall_block_view($delta = '')
+{
+  if($delta == 'tmall_detail')
+  {
+    $block = array
+    (
+      'subject' => t('Top Five Products'),
+      'content' => array
+      (
+        '#markup' => tmall_detail_markup(),
+        '#attached' => array
+        (
+          'js' => array(
+            drupal_get_path('module', 'tmall') . '/js/detail.js',
+          ),
+          'css' => array(
+            drupal_get_path('module', 'tmall') . '/css/detail.css',
+          ),
+        ),
+      ),
+    );
+    return $block;
+  }
+
+  if($delta == 'tmall_index')
+  {
+    $block = array
+    (
+      'subject' => t('Top 10 Products'),
+      'content' => array
+      (
+        '#markup' => tmall_index_markup(),
+        '#attached' => array
+        (
+          'js' => array(
+            drupal_get_path('module', 'tmall') . '/js/index.js',
+          ),
+          'css' => array(
+            drupal_get_path('module', 'tmall') . '/css/index.css',
+          ),
+        ),
+      ),
+    );
+    return $block;
+  }
+}
+
+
+function tmall_detail_markup() {
+  $result = db_query('SELECT * FROM {tmall_data}');
+  $nav = $slider_body = '';
+  $i = 0;
+  foreach ($result as $record) {
+    $render = <<<NAV
+    <a class="j-trigger" href="javascript:void(0)" t-index="$i">
+      <img src="{$record->image_url}">
+      <div class="tmall-cover"></div>
+      <div class="tmall-border"></div>
+    </a>
+NAV;
+    $nav .= $render;
+
+    $render = <<<BODY
+    <div class="tmall-item">
+      <a href="{$record->product_url}" target="_blank" class="tmall-pic big-pic">
+        <img src="{$record->image_url}">
+      </a>
+      <div class="tmall-info">
+        <a href="{$record->product_url}" class="tmall-title" target="_blank" title="{$record->title}">{$record->title}</a>
+        <a class="tmall-price" href="{$record->product_url}" target="_blank">{$record->price}</a>
+      </div>
+    </div>
+BODY;
+    $slider_body .= $render;
+    $i++;
+  }
+  $markup = <<<THIS
+<div id="tmall-detail" class="tmall-global">
+		<div class="tmall-tag"></div>
+		<div class="tmall-global_box" id="tmall-detail-ds">
+			<div class="tmall-triggers" id="tmall-detail-triggers">
+				$nav
+			</div>
+			<div class="tmall-frames" id="tmall-detail-frames">
+			<!-- Product -->
+				$slider_body
+				<!-- Product end -->
+			</div>
+		</div>
+	</div>
+THIS;
+
+  return $markup;
+}
+
+function tmall_index_markup() {
+$result = db_query('SELECT * FROM {tmall_data}');
+$nav = $slider_body = '';
+$i = 0;
+foreach ($result as $record) {
+  $render = <<<NAV
+  <a class="j-trigger" href="javascript:void(0)" t-index="$i">
+    <div class="tmall-cover"></div>
+    <div class="tmall-border"></div>
+  </a>
+NAV;
+  $nav .= $render;
+
+  $render = <<<BODY
+<div class="tmall-item">
+  <a href="{$record->product_url}" target="_blank" class="tmall-pic big-pic">
+    <img src="{$record->image_url}">
+  </a>
+  <div class="tmall-info">
+    <a href="{$record->product_url}" class="tmall-title" target="_blank" title="{$record->title}">{$record->title}</a>
+    <a class="tmall-price" href="{$record->product_url}" target="_blank">{$record->price}</a>
+  </div>
+</div>
+BODY;
+  $slider_body .= $render;
+  $i++;
+}
+
+  $markup = <<<THIS
+	<div id="tmall-index" class="tmall-global">
+		<div class="tmall-global_box" id="tmall-index-ds">
+			<div class="tmall-triggers" id="tmall-index-triggers">
+			<!-- Repeat 10 as many as products here to control the product show/hide -->
+			$nav
+			</div>
+			<div class="tmall-frames" id="tmall-index-frames">
+      <!-- Product -->
+        $slider_body
+        <!-- Product end -->
+			</div>
+		</div>
+		<div class="tmall-tag"></div>
+	</div>
+THIS;
+
+  return $markup;
+}

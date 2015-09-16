@@ -1,0 +1,4 @@
+name = Tmall
+description = Provides two slider blocks with products from tmall.
+core = 7.x
+package = Custom

@@ -1,0 +1,27 @@
+name = Crucial CN Theme
+description = A custom theme for Crucial's CN site.
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[screen][] = css/base.css
+stylesheets[screen][] = css/skeleton.css
+stylesheets[screen][] = css/style.css
+;stylesheets[screen][] = css/slide-index.css
+
+scripts[] = js/hoverIntent.js
+scripts[] = js/scripts.js
+;scripts[] = js/slide-index.js
+
+;settings[shortcut_module_link] = 1
+
+; regions[header] = Header
+regions[main_menu] = Main Menu
+regions[above_main] = Above Main
+regions[above_content] = Above Content
+regions[help] = Help
+regions[content] = Content
+regions[below_content] = Below Content
+regions[sidebar_first] = Primary sidebar
+regions[footer] = Footer
+regions[mega_menu] = Mega Menus

@@ -1,0 +1,7 @@
+;Author - Makarand Chavan
+
+name = Site
+description = Handles custom menu's, blocks, etc.
+package = Site
+version = 7.x.1.0
+core = 7.x

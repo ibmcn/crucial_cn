@@ -1,0 +1,38 @@
+@charset "utf-8";
+.front .homepage .selector-box select {
+	width: 270px !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	height: 28px !important;
+	font-size: 13px !important;
+	border-radius: 0 !important;
+	color: #000 !important;
+}
+
+.front .homepage .selector .step {
+	display: block !important;
+	padding-bottom: 35px;
+}
+.front .homepage .selector label {
+	width: 50px !important;
+	float: left !important;
+	margin-top: 5px;
+}
+.front .homepage .selector select {
+	float: right !important;
+}
+
+.front .homepage .submit-form {
+	width: 58px;
+	/*margin-left: 282px;*/
+	float:right;
+	text-align:right;
+	padding-top:4px;
+	padding-bottom:7px;
+}
+#filter-search {
+	padding: 4px 6px !important;
+}
+#slider-right p.text-right {
+	padding-left: 0;
+}

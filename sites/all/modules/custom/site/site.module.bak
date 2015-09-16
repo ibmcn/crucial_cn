@@ -1,0 +1,146 @@
+<?php
+
+/**
+ * @file
+ * @author : Makarand Chavan
+ * Handles custom menu's, blocks, etc.
+ */
+
+function site_menu() {
+  $items['选购顾问'] = array(
+    //'title' => t('Crucial 选购顾问'),
+    'title' => '<none>',
+    'page callback' => '_get_selector_page',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+function _get_selector_page() {
+  $content = '';
+  $content .= '<cajamodules include="kissy/1.3.0/core" />
+                <link rel="stylesheet" type="text/css" href="/crucial/crucial/stylesheets/default/default.css" />
+                <div class="wrapper taeapp">
+                  <div class="selector-box landing-page">
+                    <div class="hero">
+                      <div class="title">
+                        <!--<h1>Crucial 选购顾问</h1>-->
+                        <p>使用选购顾问，在最短的时间内找到100%兼容于您电脑的升级产品！</p>
+                      </div>
+                      <div id="landing-slider" class="slider">
+                        <div>
+                          <div class="tab-pannel"> <img src="/crucial/crucial/img/hero1.jpg" alt="" /> </div>
+                          <div class="tab-pannel"> <img src="/crucial/crucial/img/hero2.jpg" alt="" /> </div>
+                          <div class="tab-pannel"> <img src="/crucial/crucial/img/hero3.jpg" alt="" /> </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="selector active-1">
+                      <div class="step step-1 loading">
+                        <label><span class="num">1</span>制造商<span class="loading-icon"></span></label>
+                        <select id="stp1" name="step1" class="step-1-select">
+                        </select>
+                      </div>
+                      <div class="step step-2 ">
+                        <label><span class="num">2</span>产品线<span class="loading-icon"></span></label>
+                        <select id="stp2" name="step2" class="step-2-select">
+                        </select>
+                        <span class="loader" style="display: inline;">
+                        	<img style="display:inline;" src="data:image/gif;base64,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" alt="..."/>
+                        </span>
+                      </div>
+                      <div class="step step-3">
+                        <label><span class="num">3</span>型号<span class="loading-icon"></span></label>
+                        <select id="stp3" name="step3" class="step-3-select">
+                        </select>
+                      </div>
+                    </div>
+                    <!--selector -->
+
+                  </div>
+                  <!--selector-box-->
+                  <div class="result step">
+                    <div class="scrollup hide"></div>
+                    <div class="scrolldown hide"></div>
+                    <div class="plist clearfix has_ddr has_ssd">
+                      <div class="ddr clearfix"></div>
+                      <div class="ssd clearfix"></div>
+
+                    </div>
+
+                  </div>
+                </div>';
+                if(!empty($_POST)) {
+                	if(!empty($_POST['step1'])) {
+                		$content .= '<input type="hidden" id="step1-val" name="step1_val" value="'.$_POST['step1'].'"/>';
+                	}
+                	if(!empty($_POST['step2'])) {
+                		$content .= '<input type="hidden" id="step2-val" name="step2_val" value="'.$_POST['step2'].'"/>';
+                	}
+                	if(!empty($_POST['step3'])) {
+                		$content .= '<input type="hidden" id="step3-val" name="step3_val" value="'.$_POST['step3'].'"/>';
+                	}
+                }
+
+    $content .= '<script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed-min.js" data-config="{combine:true}"></script>
+                <script language="javascript" src="/crucial/crucial/js/main.js"></script>';
+  //drupal_add_js('http://g.tbcdn.cn/kissy/k/1.4.3/seed-min.js', 'external');
+  //drupal_add_js('/crucial/crucial/js/main.js', array('scope' => 'footer'));
+  return $content;
+}
+
+function site_block_info() {
+  // This example comes from node.module.
+  $blocks['filter_block'] = array(
+    'info' => t('filter block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+function site_block_view($delta = '') {
+	$block = array();
+	switch ($delta) {
+	    case 'filter_block':
+	      $block['subject'] = t('');
+	      $block['content'] = '<cajamodules include="kissy/1.3.0/core" />
+                <link rel="stylesheet" type="text/css" href="/crucial/crucial/stylesheets/default/default-homepage.css" />
+                <div class="wrapper taeapp homepage">
+                  <div class="selector-box">
+                  	<form id="filter_select" action="选购顾问" method="POST">
+	                    <div class="selector active-1">
+	                      <div class="step step-1 loading">
+	                        <label><span class="num">1</span>制造商<span class="loading-icon"></span></label>
+	                        <select name="step1" class="step-1-select">
+	                        </select>
+	                      </div>
+	                      <div class="step step-2 ">
+	                        <label><span class="num">2</span>产品线<span class="loading-icon"></span></label>
+	                        <select name="step2" class="step-2-select">
+	                        </select>
+	                        <span class="loader" style="display: inline;position: absolute; top: 290px; left: 282px;">
+                        		<img style="display:inline;" src="data:image/gif;base64,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" alt="..."/>
+                        	</span>
+	                      </div>
+	                      <div class="step step-3">
+	                        <label><span class="num">3</span>型号<span class="loading-icon"></span></label>
+	                        <select name="step3" class="step-3-select">
+	                        </select>
+	                      </div>
+	                      <div class="submit-form">
+	                      	<input type="submit" title="Filter" value="立即匹配" id="filter-search"/>
+	                      </div>
+	                    </div>
+	                </form>
+                    <!--selector -->
+                  </div>
+                  <!--selector-box-->
+                </div>
+                <script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed-min.js" data-config="{combine:true}"></script>
+                <script language="javascript" src="/crucial/crucial/js/main.js"></script>';
+	    break;
+	}
+	return $block;
+}

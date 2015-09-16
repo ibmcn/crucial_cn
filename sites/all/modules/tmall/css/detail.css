@@ -1,0 +1,193 @@
+
+#tmall-detail .tmall-tag {
+	background: url(../img/tag-tmallhot.png) no-repeat;
+	width: 150px;
+	height: 95px;
+	position: absolute;
+	z-index: 100;
+	top:66px;
+	left:0;
+}
+#tmall-detail {
+	width: 300px;
+	height: 400px;
+	background-color: #fff;
+	font-family: Tahoma, Arial;
+	overflow: hidden;
+	position: relative;
+}
+#tmall-detail div,
+#tmall-detail a,
+#tmall-detail em,
+#tmall-detail span,
+#tmall-detail i {
+	margin: 0px;
+	padding: 0px;
+	font-style: normal;
+}
+#tmall-detail {
+	width: 100%;
+	height: 340px;
+	background-color: #fff;
+	font-family: Tahoma, Arial;
+	overflow: hidden;
+	position: relative;
+}
+#tmall-detail .tmall-global_box {
+	width: 100%;
+	height: 338px;
+	border: 1px #e5e5e5 solid;
+	position: relative;
+}
+#tmall-detail .tmall-triggers {
+	overflow: hidden;
+	height: 48px;
+	margin: 10px 0 0 .1em;
+}
+#tmall-detail .tmall-frames {
+	width: 100%;
+	height: 270px;
+	overflow: hidden;
+	margin: 6px auto;
+	position: relative;
+}
+#tmall-detail .tmall-frames .tmall-item {
+	display: none;
+	width: 100%;
+	height: 270px;
+	position: relative;
+	/* text-align: center; */
+}
+#tmall-detail a {
+	font-size: 12px;
+	text-decoration: none;
+}
+#tmall-detail .tmall-item .tmall-pic {
+	/*background-color: #f8f8f8;*/
+	display: table-cell;
+	vertical-align: middle;
+	width: 270px;
+	height: 270px;
+	text-align: center;
+	font: normal 12px/1.5 arial;
+	overflow: hidden;
+}
+#tmall-detail .tmall-item .tmall-pic {
+	/*background-color: #f8f8f8;*/
+	display: table-cell;
+	vertical-align: middle;
+	/*width: 100%; */
+	 /*height: 270px; */
+	text-align: center;
+	font: normal 12px/1.5 arial;
+	overflow: hidden;
+	 margin: 0 auto;
+	 text-align: center;
+}
+#tmall-detail .tmall-item .tmall-pic img {
+	border: none;
+	width: 100%;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+#tmall-detail .tmall-current {
+	display: block !important;
+	width:100%;
+}
+#tmall-detail a {
+	font-size: 12px;
+	text-decoration: none;
+}
+#tmall-detail .tmall-triggers a {
+	background-color: #f8f8f8;
+	display: table-cell;
+	vertical-align: middle;
+	float: left;
+	width: 15%;
+	height: 40px;
+	line-height: 36px;
+	margin: 4px 0 0 .8em;
+	font-family: arial, sans-serif;
+	overflow: visible;
+	position: relative;
+	_display: inline;
+}
+#tmall-detail .tmall-border {
+	/*width: 44px;*/
+	width:120%;
+	height: 44px;
+	position: absolute;
+	top: -4px;
+	left: -4px;
+	border: 2px solid #0092c8;
+	display: none;
+}
+#tmall-detail .tmall-cover {
+	filter: alpha(opacity=60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+	background: #fff;
+	/*width: 40px;*/
+	width: 100%;
+	height: 40px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#tmall-detail .j-trigger img {
+	max-width:40px;
+	max-height:40px;
+	width: 100%;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+#tmall-detail .big-pic img {
+	/* max-width:270px; */
+	max-height: 270px;
+}
+:root #tmall-detail .tmall-item .tmall-info {
+	filter: none\9;
+}
+#tmall-detail .tmall-item .tmall-info {
+	height: 46px;
+	width: 100%;
+	padding: 0 5px 0 0px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: rgba(0, 145, 202, 0.7);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc0091ca, endColorstr=#cc0091ca);
+}
+#tmall-detail .tmall-item .tmall-info .tmall-title {
+	font-family:"Microsoft YaHei";
+	margin: 6px 0 3px 6px;
+	display: block;
+	line-height: 14px;
+	height: 15px;
+	font-size: 14px;
+	width: 100%;
+	float: left;
+	text-align: left;
+	color: #fff;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	text-shadow: 1px 1px 2px #333;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+#tmall-detail .tmall-item .tmall-info .tmall-price{
+	font-family:"Microsoft YaHei";
+	font-weight: bold;
+	color: #FF9326;
+	margin-left: 6px;
+	text-shadow: 1px 1px 2px #333;
+}
+/*#tmall-detail .tmall-item .tmall-info .tmall-price em {
+	font-weight: bold;
+	color: #FF9326;
+	text-shadow: 1px 1px 2px #333;
+}*/
+#tmall-detail .j-trigger.tmall-current .tmall-cover{display:none;}
+#tmall-detail .j-trigger.tmall-current .tmall-border{display:block;}
+
